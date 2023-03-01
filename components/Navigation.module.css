@@ -1,12 +1,11 @@
-.navigation{
-    display: flex;
-    list-style: none;
-    gap: 32px;
-    padding: 4px;
-
+.navigation {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+  padding: 4px;
 }
 
-.header{
-    background-color: #050b6e;
-    padding: 4px;
+.header {
+  background-color: #050b6e;
+  padding: 4px;
 }

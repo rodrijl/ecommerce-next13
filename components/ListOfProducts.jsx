@@ -26,8 +26,8 @@ export default async function ListOfProducts() {
               alt="beer image"
               width={200}
               height={300}
-              layout={"fixed"}
-              objectFit={"contain"}
+              layout="fixed"
+              objectFit="contain"
             />
             <h2>{product.brand}</h2>
           </Link>

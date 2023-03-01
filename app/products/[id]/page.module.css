@@ -1,11 +1,11 @@
-.sku{
-    text-align: center;
-    width: 100%;
-    margin-top: 20px;
+.sku {
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
 }
 
-.image{
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+.image {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }

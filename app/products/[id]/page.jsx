@@ -11,7 +11,6 @@ async function getProducts() {
 async function getCode(id) {
   const response = await fetch(`http://localhost:3000/api/stock-price/${id}`, {
     next: { revalidate: 5 },
-    cache: "no-store",
   });
   const data = await response.json();
   return data;
@@ -19,48 +18,47 @@ async function getCode(id) {
 
 export default async function Product({ params }) {
   const products = await getProducts();
+  //id generated
   const { id } = params;
+  const productId = id.match(/\d/g)?.join("");
 
-  let numb = id.match(/\d/g);
-  numb = numb?.join("");
+  const product = products.find(({ id }) => id.toString() === productId);
 
-  const result = products.find(({ id }) => id.toString() === numb);
-
-  const codes = result.skus.map((x) => x.code);
+  const codes = product.skus.map((x) => x.code);
 
   let prices = [];
-  for (let elem of codes) {
+  for (let code of codes) {
     try {
-      let insertResponse = await getCode(elem);
-      prices.push(insertResponse);
+      const response = await getCode(code);
+      prices.push(response);
     } catch (error) {
       console.log("error" + error);
     }
   }
 
-  const j = result.skus.map((v) => ({
-    ...v,
-    ...prices.find((sp) => sp.key === v.code),
+  const stockUnit = product.skus.map((sku) => ({
+    ...sku,
+    ...prices.find((price) => price.key === sku.code),
   }));
 
   return (
-    <div key={numb}>
+    <div key={productId}>
       <div className={styles.image}>
         <Image
-          src={result.image}
+          src={product.image}
           alt="beer image"
           sizes="(min-width: 768px) 80px, 60px"
           width={250}
           height={300}
         />
       </div>
-      <h2>{result.brand}</h2>
-      <p>Style: {result.style}</p>
-      <p>Substyle: {result.substyle}</p>
-      <p>Abv: {result.abv}</p>
-      <p>Origin: {result.origin}</p>
-      <p>Description: {result.information}</p>
-      {j.map((sku) => (
+      <h2>{product.brand}</h2>
+      <p>Style: {product.style}</p>
+      <p>Substyle: {product.substyle}</p>
+      <p>Abv: {product.abv}</p>
+      <p>Origin: {product.origin}</p>
+      <p>Description: {product.information}</p>
+      {stockUnit.map((sku) => (
         <div key={sku.key} className={styles.sku}>
           <p>{sku.name}</p>
           <p>Stock: {sku.stock}</p>
