@@ -1,10 +1,17 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: normal;
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+}
+
+.main h1{
+  margin-bottom: 20px;
+}
+.main a{
+  text-decoration: underline;
 }
 
 .description {
