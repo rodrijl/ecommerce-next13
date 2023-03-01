@@ -16,3 +16,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+Note: Revalidate functionality is currently not working in next 13 (https://github.com/vercel/next.js/discussions/42290)
